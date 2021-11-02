@@ -1,9 +1,15 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
+
+.classpath
+.project
+Servlet/
+ch1/.gitignore
+ch2/.gitignore
 */.gitignore
 */WebContent/META-INF
-
+.
 
 ### Eclipse ###
 .metadata
