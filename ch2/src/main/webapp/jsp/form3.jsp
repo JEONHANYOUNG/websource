@@ -20,7 +20,7 @@
 </head>
 <!-- 시작 페이지(form1) -->
 <body>
-   <form action="../InfoServlet" method="post">
+   <form action="../info" method="post">
       <div>
         <label for="userid">아이디</label>
         <input type="text" name="userid" id="userid" />

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class InfoServlet
  */
-@WebServlet("/InfoServlet")
+@WebServlet("/info")// url 만드는 주소
 public class InfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
