@@ -15,7 +15,7 @@
 	String tab = request.getParameter("tab");
 
     if(tab==null){
-    	tab = "insert";
+    	tab = "search";
     }
 %>
 <script>
