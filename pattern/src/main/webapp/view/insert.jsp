@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- insert.jsp에서 삽입버튼을 누르면 "/insert.do"로 가라고 한것이고 거기서 멈추라고 한것(목적지는 servlet으로 간것)  -->
 <p>
-	<a href="/insert.do">삽입</a>
+	<a href="/insert.do">삽입</a> 
 </p>
 </body>
 </html>
