@@ -3,7 +3,7 @@ package pattern.controller;
 
 
 import pattern.action.Action;
-import pattern.action.InsertAction;
+import pattern.action.LoginAction;
 
 public class ActionFactory {
 	
@@ -22,9 +22,9 @@ public class ActionFactory {
 	Action action=null;
 	
 	public Action action(String cmd) {
-		
-		if (cmd.equals("/insert.do")) {
-			action = new InsertAction(); //InsertAction 객체가 만들어진것
+		//action 작업이 성공하면 움직일 페이지 기록
+		if (cmd.equals("/login.do")) {
+			action = new LoginAction("/index.jsp"); //InsertAction 객체가 만들어진것, loginAction이 담당
 		} else if (cmd.equals("/update.do")) {
 			
 		} else if (cmd.equals("/index.do")) {
@@ -32,7 +32,7 @@ public class ActionFactory {
 			
 		}
 				
-		return action; //실행하면 PatternController
+		return action; //실행하면 PatternController, InsertAction이 리턴된 것
 		
 		
 		

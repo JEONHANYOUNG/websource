@@ -1,5 +1,5 @@
 package book.persistence;
-
+// 기능 설정
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

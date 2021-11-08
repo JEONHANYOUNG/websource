@@ -29,7 +29,7 @@ public class CartAdd extends HttpServlet {
 		if(cartList!=null) { //기존에 담아놓은 장바구니가 존재할 때 
 			cartList.add(product);
 		} else { // 새롭게 장바구니 생성
-			cartList = new ArrayList<String>();
+			cartList = new ArrayList<String>(); 
 			cartList.add(product);
 			session.setAttribute("cartList", cartList);
 		}
