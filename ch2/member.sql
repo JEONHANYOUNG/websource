@@ -7,6 +7,7 @@ create table member(
    email varchar2(50) not null
 );
 insert into member values('hong123', 'hong123@', '홍길동', '남', 'hong123@gmail.com');
+insert into member values('hong123', 'hong123@', '김자바', '남', 'kim123@gmail.com');
 
 select * from member where userid = 'hong123' and password = 'hong';
 
@@ -14,6 +15,6 @@ alter table member modify gender nvarchar2(10)
 
 select * from member;
 
-delete from MEMBER where userid='hong12343' and password='1414';
+update MEMBER set name='김자바' where userid='아이디' and password='현재비밀번호';
 
-update MEMBER set password='123';
+delete from MEMBER where userid='hong12343' and password='1414';

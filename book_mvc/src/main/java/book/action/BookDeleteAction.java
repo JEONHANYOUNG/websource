@@ -16,7 +16,7 @@ public class BookDeleteAction implements BookAction {
    String code = request.getParameter("code");
    
    
-   BookDeleteService  service = new BookDeleteService();
+   BookDeleteService service = new BookDeleteService();
    boolean deleteFlag = service.bookDelete(code);
    
    

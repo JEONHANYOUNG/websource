@@ -52,7 +52,7 @@ public class BookDAO {
       return insertFlag;
    }
    //DELETE
-   public boolean delete(String code) {
+   public boolean delete(String code) {//boolean => 메소드  string => 타입, code => 변수
       boolean deleteFlag = false;
       PreparedStatement pstmt = null;
       
