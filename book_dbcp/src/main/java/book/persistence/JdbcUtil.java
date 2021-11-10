@@ -1,4 +1,4 @@
-package member.persistence;
+package book.persistence;
 // DB연동시 매번 반복되는 코드 
 
 import java.sql.Connection;
@@ -7,21 +7,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 
 public class JdbcUtil {
+   // 드라이브 로드
+   static {
+      try {
+         Class.forName("oracle.jdbc.OracleDriver");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 
    // connection
-   public static Connection getConnection() {// static은 값을 고정된 거로 받는 것(가져오는 것)
+   public static Connection getConnection() {
       try {
-    	 Context ctx = new InitialContext();
-    	 // java:comp/env : 이름으로 찾을 때 사용하는 공간의 이름
-    	 DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myoracle");
-         Connection con =  ds.getConnection();
-         // 자바 응용프로그램에서는 autoCommit 상태임
+         String url = "jdbc:oracle:thin:@localhost:1521:xe";
+         String user = "c##java";
+         String password = "12345";
+         Connection con =  DriverManager.getConnection(url, user, password);
          // autoCommit을 true 에서 false 
          con.setAutoCommit(false);
          return con;
@@ -32,7 +35,7 @@ public class JdbcUtil {
    }
 
  //commit
-   public static void commit(Connection con) {// static 뜻, 변함이 없는 고정 값, void는 반환값이 없는 것
+   public static void commit(Connection con) {
       try {
          con.commit();
       } catch (SQLException e) {
