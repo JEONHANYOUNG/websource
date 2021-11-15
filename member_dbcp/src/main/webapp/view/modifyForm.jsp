@@ -3,8 +3,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <%
-
-MemberDTO loginDto = (MemberDTO)session.getAttribute("loginDto");
+	//세션에서 로그인 정보 가져오기
+	//MemberDTO loginDto = (MemberDTO)session.getAttribute("loginDto");
 
 %>
 <form id="modifyform" action="/modify.do" method="post">
@@ -40,7 +40,8 @@ MemberDTO loginDto = (MemberDTO)session.getAttribute("loginDto");
 </form>
 <%--로그인 후 메뉴 스크립트--%>
 <script>
-   let name = '<%=loginDto.getName()%>';
+ <%--   let name = '<%=loginDto.getName()%>'; --%>
+ 	let name = '${loginDto.name}';
 </script>
 <script src="../js/menu.js"></script>
 <%--정보수정 들어왔으니 정부수정 버튼 없애기--%>

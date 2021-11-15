@@ -137,7 +137,7 @@ public class MemberDAO {
 	}
 	
 	
-	 //중복 아이디 검사
+	 //중복 아이디 검사 (select)
 	   public boolean idCheck(String userid) {
 		   
 		   PreparedStatement pstmt = null;

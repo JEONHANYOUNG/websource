@@ -4,7 +4,7 @@
 <%@ include file="../layout/header.jsp" %>
 <%
 	//세션에서 로그인 정보 가져오기
-	MemberDTO loginDto =(MemberDTO)session.getAttribute("loginDto");
+	//MemberDTO loginDto =(MemberDTO)session.getAttribute("loginDto");
 
 %>
 <form id="leaveform" action="/leave.do" method="post">
@@ -15,7 +15,8 @@
 	 	<div class="card-body">	
 			<div class="form-group row justify-content-center">		
 				<div class="col-sm-10">	
-					<input type="text" name="userid" id="userid" class="form-control" value="<%=loginDto.getUserid() %>" readonly/>
+					<%-- <input type="text" name="userid" id="userid" class="form-control" value="<%=loginDto.getUserid() %>" readonly/> --%>
+			 		<input type="text" name="userid" id="userid" class="form-control" value="${loginDto.userid}" readonly/>
 			 		<small id="userid" class="text-info"></small>		
 				</div>
 			</div>	
@@ -34,7 +35,8 @@
 </form>
 <%--로그인 후 메뉴 스크립트--%>
 <script>
-		let name = '<%=loginDto.getName()%>';
+		<%-- let name = '<%=loginDto.getName()%>'; --%>
+		let name = '${loginDto.name}';
 	</script>
 <%--버튼 클릭 이벤트 스크립트--%>
 	<script src = "../js/menu.js"></script>
