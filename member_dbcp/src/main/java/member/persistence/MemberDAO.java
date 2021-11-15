@@ -1,6 +1,5 @@
 package member.persistence;
 
-import java.io.Closeable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -136,5 +135,37 @@ public class MemberDAO {
 		}
 		return registerFlag;
 	}
+	
+	
+	 //중복 아이디 검사
+	   public boolean idCheck(String userid) {
+		   
+		   PreparedStatement pstmt = null;
+		   ResultSet rs = null;
+		   boolean dupFlag = true;
+		   
+		   try {
+			
+			   String sql = "select * from member where userid=?";
+			   pstmt = con.prepareStatement(sql);
+			   pstmt.setString(1, userid);
+			   rs = pstmt.executeQuery();
+			   
+			   if (rs.next()) {
+				  dupFlag = false;
+			}
+			   
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+	   return dupFlag;
+	   }
+	
+	
+	
+	
 	
 }

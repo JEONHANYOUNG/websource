@@ -31,7 +31,7 @@ public class BookActionFactory {
 			action = new BookDeleteAction("/list.do");
 		} else if(cmd.equals("/search.do")) {
 			action = new BookSearchAction("/searchIndex.jsp");
-		}
+		} 
 		
 		
 		return action;

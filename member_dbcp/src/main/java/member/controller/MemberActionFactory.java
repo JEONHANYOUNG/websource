@@ -1,6 +1,7 @@
 package member.controller;
 
 import member.action.Action;
+import member.action.DuplicationAction;
 import member.action.JoinAction;
 import member.action.LeaveAction;
 import member.action.LoginAction;
@@ -34,7 +35,9 @@ public class MemberActionFactory {
 	    	action = new ModifyAction("/view/loginForm.jsp");   				
 	    }else if (cmd.equals("/join.do")) {
 	    	action = new JoinAction("/view/loginForm.jsp");
-	    }
+	    } else if(cmd.equals("/dupId.do")) {
+			action = new DuplicationAction("/view/dupid.jsp");
+		}
 		
 	    return action;
 	   
