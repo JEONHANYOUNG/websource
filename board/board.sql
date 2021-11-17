@@ -24,3 +24,44 @@ values(board_seq.nextval,'게시판 작성','게시판을 작성해 봅시다','
 select * from BOARD;
 
 update board set readcount = readcount+1 where bno=3;
+
+delete from board where bno=6 and password='12345';
+
+
+select count(*) from BOARD;
+
+-- 더미 데이터 삽입
+insert into BOARD(bno,name,password,title,content,re_ref,re_lev,re_seq)
+(select board_seq.nextval,name,password,title,content,board_seq.currval,re_lev,re_seq 
+from board);
+
+-- 댓글 
+select bno,title,re_ref,re_seq,re_lev from board where bno=987;
+
+-- re_ref : 댓글 작성 시 원본 글의 글번호(그룹 번호)
+-- re_seq : 댓글의 순서
+-- re_lev : 댓글의 레벨(원본 글의 댓글이냐? 댓글의 댓글이냐?)
+
+-- 675 댓글 작성
+-- re_ref : 원본글의 re_ref 값
+-- re_seq : 원본글의 re_seq+1
+-- re_lev : 원본글의 re_lev+1
+
+
+delete from board where re_ref = 988;
+delete from board where bno > 988;
+
+
+insert into board(bno,title,content,password,attach,name,re_ref,re_seq,re_lev)
+values(board_seq.nextval,'Re: 게시판 작성','게시판을 작성해 봅시다','12345',null,'홍길동',987,1,1);
+
+
+
+-- 675 두번째 댓글(가장 최신 댓글이 위로 올라와야 한다) 계층형으로 하려면 update를 하고 insert 진행
+-- 원본 글의 re_ref, re_seq, re_lev(업데이트 시)
+update board set re_seq = re_seq + 1 where re_ref = 987 and re_seq > 0; 
+
+insert into board(bno,title,content,password,attach,name,re_ref,re_seq,re_lev)
+values(board_seq.nextval,'Re: 게시판 작성2','게시판을 작성해 봅시다','12345',null,'홍길동',987,1,1);
+
+select bno,title,re_ref,re_seq,re_lev from board where re_ref=987 order by re_seq;
