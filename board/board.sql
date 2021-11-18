@@ -65,3 +65,85 @@ insert into board(bno,title,content,password,attach,name,re_ref,re_seq,re_lev)
 values(board_seq.nextval,'Re: 게시판 작성2','게시판을 작성해 봅시다','12345',null,'홍길동',987,1,1);
 
 select bno,title,re_ref,re_seq,re_lev from board where re_ref=987 order by re_seq;
+
+-- search
+select * from board where title like '%게시판%';
+select * from board where content like '%게시판%';
+select * from board where name like '%게시판%';
+
+
+-- 페이지 나누기
+-- rownum: 가상컬럼(임시값) - 조회된 결과에 번호를 매기는 것, 행번호 
+select rownum, bno, title from board order by bno desc;
+
+-- select rownum, bno, title from board where rownum > 10;
+select rownum, bno, title from board where rownum <= 10;
+
+select rownum, bno, title from board where rownum <= 10 order by bno desc;
+
+-- rownum과 order by 쓸 때 주의점
+-- 정렬을 한 후 번호를 매기지 않음
+select rownum, bno, title from board where rownum <= 10
+order by re_ref desc,re_seq asc;
+
+-- 인라인 쿼리 작성
+select rownum,bno,title
+from
+	(select bno,title from board where bno>0 order by re_ref desc,re_seq asc)
+where rownum <= 20;
+
+-- 1 click => 최신글 10개 가져오기
+-- 1부터 10까지
+select rnum,bno,title
+from
+	(select rownum rnum,A.*
+	from
+		(select bno,title from board where bno>0 order by re_ref desc,re_seq asc) A
+	where rownum <= 10)
+where rnum > 0;
+
+-- 2 click => 그 다음 최신글 10개 가져오기
+-- 11부터 20까지
+select rnum,bno,title
+from
+	(select rownum rnum,A.*
+	from
+		(select bno,title from board where bno>0 order by re_ref desc,re_seq asc) A
+	where rownum <= 20)
+where rnum > 10;
+
+-- 3 click => 한페이지에 10개씩
+-- 21부터 30까지
+select rnum,bno,title
+from
+	(select rownum rnum,A.*
+	from
+		(select bno,title from board where bno>0 order by re_ref desc,re_seq asc) A
+	where rownum <= 30)
+where rnum > 20;
+
+
+-- 1 2 3 4 5 6 7
+
+-- 1(10,0) : 1*10, (1-1)*10
+-- 2(20,10) : 2*10, (2-1)*10
+-- 3(30,20) : : 3*10, (3-1)*10
+
+select rnum,bno,title
+from
+	(select rownum rnum,A.*
+	from
+		(select bno,title from board where bno>0 and title like '%게시판%' order by re_ref desc,re_seq asc) A
+	where rownum <= 20)
+where rnum > 10;
+
+
+select count(*) from board; --전체게시물
+
+select count(*) from board where title like '%게시판%'; --검색 게시물
+
+
+
+
+
+

@@ -12,8 +12,19 @@
 			<!--글쓰기 버튼-->
 			<button type="button" class="btn btn-success" onclick="location.href='/view/qna_board_write.jsp'">새글작성</button>
 			</div>
-			<div class="col-md-4 offset-md-4"><!--검색 들어갈 부분-->
-			</div>
+			<div class="col-md-4 offset-md-4">
+				<!--검색 들어갈 부분-->
+				<form action="/search.do" method="post" id="search">
+					<select name="criteria" id="">
+					 <option value="n" <c:out value="${searchDto.criteria == null?'selected':''}"/>>--------</option>
+					 <option value="title" <c:out value="${searchDto.criteria == 'title'?'selected':''}"/>>title</option>
+					 <option value="content" <c:out value="${searchDto.criteria == 'content'?'selected':''}"/>>content</option>
+					 <option value="name" <c:out value="${searchDto.criteria == 'name'?'selected':''}"/>>name</option>
+					</select>
+					<input type="text" name="keyword" id="" value="${searchDto.keyword}" />
+					<button type="button" class="btn btn-primary">검색</button>
+				</form>			
+			</div>     
 		</div>
 		<br>
 		<table class="table table-bordered">
@@ -45,7 +56,25 @@
 			<div class="row  justify-content-md-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination"><!--하단의 페이지 나누기 부분-->
-
+					
+					<c:if test="${pageDto.prev}">
+					  	<li class="page-item">
+					    	<a class="page-link move" href="${pageDto.page-10}">Previous</a>
+				       	</li>
+				    </c:if>
+				    
+				    <!-- 하단의 1 2 3 4 5.... -->
+				    <c:forEach begin="${pageDto.startPage}" end="${pageDto.endPage}" var="idx">
+					  	<li class="page-item ${pageDto.page==idx?'active':''}" aria-current="page">
+					   		<a class="page-link move" href="${idx}">${idx}</a>
+					 	 </li>
+					</c:forEach>
+					
+					<c:if test="${pageDto.next}">
+					  	<li class="page-item">
+					    	<a class="page-link move" href="${pageDto.page+10}">Next</a>
+					  	</li>
+					</c:if>
 				  </ul>
 				</nav>					
 			</div>
@@ -53,4 +82,12 @@
 		<div style="height:20px"></div>
 	</div>	
 </section>
+</section>
+<form action="" method="get" role="form" id="actionForm">
+	<input type="hidden" name="page" value="${pageDto.page}"/>
+	<input type="hidden" name="amount" value="${pageDto.amount}"/>
+	<input type="hidden" name="criteria" value="${pageDto.searchDto.criteria}"/>
+	<input type="hidden" name="keyword" value="${pageDto.searchDto.keyword}"/>
+</form>
+<script src="/js/list.js"></script>
 <%@include file="../include/footer.jsp"%>

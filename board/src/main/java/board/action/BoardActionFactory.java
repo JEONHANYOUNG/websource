@@ -14,14 +14,14 @@ public class BoardActionFactory {
 		return baf;
 	}
 	
-	public BoardAction action(String cmd) {
+	public BoardAction action(String cmd) {  
 		if (cmd.equals("/insert.do")) {
 			action = new BoardInsertAction("/list.do");
 		} else if (cmd.equals("/list.do")) {
 			action = new BoardListAction("/view/qna_board_list.jsp");
 		} else if (cmd.equals("/read.do")) {
 			action = new BoardReadAction("/view/qna_board_view.jsp");
-		} else if (cmd.equals("/countUpdate.do")) {
+		} else if (cmd.equals("/countUpdate.do")) {      
 			action = new BoardCountUpdateAction("/read.do");
 		} else if (cmd.equals("/remove.do")) {
 			action = new BoardRemoveAction("/list.do");
