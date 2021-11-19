@@ -10,21 +10,24 @@
 		<div class="row">
 			<div class="col-md-4">
 			<!--글쓰기 버튼-->
-			<button type="button" class="btn btn-success" onclick="location.href='/view/qna_board_write.jsp'">새글작성</button>
-			</div>
+			<button type="button" class="btn btn-success">새글작성</button>
+			</div>                                                      
+			       
 			<div class="col-md-4 offset-md-4">
 				<!--검색 들어갈 부분-->
-				<form action="/search.do" method="post" id="search">
+				<form action="/list.do" method="get" id="search">
+					<input type="hidden" name="page" value="${pageDto.page}"/>
+					<input type="hidden" name="amount" value="${pageDto.amount}"/>
 					<select name="criteria" id="">
-					 <option value="n" <c:out value="${searchDto.criteria == null?'selected':''}"/>>--------</option>
-					 <option value="title" <c:out value="${searchDto.criteria == 'title'?'selected':''}"/>>title</option>
-					 <option value="content" <c:out value="${searchDto.criteria == 'content'?'selected':''}"/>>content</option>
-					 <option value="name" <c:out value="${searchDto.criteria == 'name'?'selected':''}"/>>name</option>
+					 	<option value="n" <c:out value="${searchDto.criteria == null?'selected':''}"/>>--------</option>
+					 	<option value="title" <c:out value="${searchDto.criteria == 'title'?'selected':''}"/>>title</option>
+						<option value="content" <c:out value="${searchDto.criteria == 'content'?'selected':''}"/>>content</option>
+						<option value="name" <c:out value="${searchDto.criteria == 'name'?'selected':''}"/>>name</option>
 					</select>
 					<input type="text" name="keyword" id="" value="${searchDto.keyword}" />
 					<button type="button" class="btn btn-primary">검색</button>
 				</form>			
-			</div>     
+			</div>               
 		</div>
 		<br>
 		<table class="table table-bordered">
@@ -44,7 +47,8 @@
 								&nbsp;<!-- space바 한번 누른 것 -->
 							</c:forEach>
 						</c:if>
-						<a href="/countUpdate.do?bno=${dto.bno}">${dto.title}</a>
+						<%-- /countUpdate.do?bno=${dto.bno} --%>
+						<a href="${dto.bno}" class="count">${dto.title}</a>
 					</td>
 					<td class='text-center'>${dto.name}</td><!--작성자-->
 					<td class='text-center'>${dto.regdate}</td><!--날짜-->
@@ -79,15 +83,15 @@
 				</nav>					
 			</div>
 		</div>
-		<div style="height:20px"></div>
+		<div style="height:20px"></div>         
 	</div>	
-</section>
 </section>
 <form action="" method="get" role="form" id="actionForm">
 	<input type="hidden" name="page" value="${pageDto.page}"/>
 	<input type="hidden" name="amount" value="${pageDto.amount}"/>
 	<input type="hidden" name="criteria" value="${pageDto.searchDto.criteria}"/>
 	<input type="hidden" name="keyword" value="${pageDto.searchDto.keyword}"/>
+	<input type="hidden" name="bno" value=""/>                  
 </form>
 <script src="/js/list.js"></script>
 <%@include file="../include/footer.jsp"%>

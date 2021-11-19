@@ -1,5 +1,6 @@
 package board.action;
 
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.util.Map;
 
@@ -32,7 +33,14 @@ public class BoardInsertAction implements BoardAction {
 		 //파일 첨부
 		 insertDto.setAttach(map.get("attach"));
 		
-		
+		//페이지 나누가 후 추가(받은 것)
+		String page = map.get("page");
+		String amount = map.get("amount");
+		String criteria = map.get("criteria");
+		String keyword = URLEncoder.encode(map.get("keyword"),"utf-8");
+					
+		//----------------------------------------------
+		 	
 		// 서비스(insert service)에게 작업을 요청
 		
 		 BoardInsertService service = new BoardInsertService(); 
@@ -40,6 +48,14 @@ public class BoardInsertAction implements BoardAction {
 		 
 		// 결과에 따라 이동 if (!insertFlag) { path = "/view/qna_board_write.jsp"; }
 		
+		 if (!insertFlag) {
+			path = "/view/qna_board_write.jsp";
+			path += "?page="+page+"&amount="+amount+"&criteria="+criteria
+					  +"&keyword="+keyword;
+		} else {
+			path += "?page="+page+"&amount="+amount+"&criteria="+criteria
+					  +"&keyword="+keyword;
+		}
 		
 		return new BoardActionForward(path, true); //requestsetAttribute가 들어오면 false
 	}
