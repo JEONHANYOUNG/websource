@@ -78,27 +78,7 @@ public class BookDAO {
       }
       return deleteFlag;
    }
-   //UPDATE
-   public boolean update(BookDTO dto) {
-      boolean updateFlag = false;
-      String sql = "update ";
-      PreparedStatement pstmt = null;
-      try {
-         
-         pstmt = con.prepareStatement(sql);
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }finally {
-         try {
-            close(pstmt);
-         } catch (Exception e2) {
-            e2.printStackTrace();
-         }
-      }
-      
-      return updateFlag;
-   }
+  
    //select
    public ArrayList<BookDTO> select(BookDTO dto) {
       boolean updateFlag = false;
